@@ -1,0 +1,6 @@
+{
+  "wiki": {
+    "edges"  : "../dataset/wiki/Wiki_edgelist.txt",
+    "labels" : "../dataset/wiki/wiki_labels.txt"
+  }
+}
