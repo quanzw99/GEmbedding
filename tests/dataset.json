@@ -2,5 +2,17 @@
   "wiki": {
     "edges"  : "../dataset/wiki/Wiki_edgelist.txt",
     "labels" : "../dataset/wiki/wiki_labels.txt"
+  },
+  "cora": {
+    "edges"  : "../dataset/cora/cora_edgelist.txt",
+    "labels" : "../dataset/cora/cora_labels.txt"
+  },
+  "blogCatalog": {
+    "edges"  : "../dataset/blogCatalog/bc_edgelist.txt",
+    "labels" : "../dataset/blogCatalog/bc_labels.txt"
+  },
+  "dblp": {
+    "edges"  : "../dataset/dblp/dblp_edgelist.txt",
+    "labels" : "../dataset/dblp/dblp_labels.txt"
   }
 }

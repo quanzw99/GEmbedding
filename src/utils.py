@@ -48,6 +48,7 @@ def node_visualization(embeddings, labels):
 
     labels, counts = np.unique(y, return_counts=True)
     top_labels = labels[np.argsort(counts)][::-1][:3]
+    # top_labels = labels[np.argsort(counts)][:3]
 
     mask = np.isin(y, top_labels)
     X_top = X_tsne[mask]
@@ -57,7 +58,7 @@ def node_visualization(embeddings, labels):
     color_map = dict(zip(top_labels, colors))
     c = np.array([color_map[label] for label in y_top])
 
-    plt.figure(figsize=(5, 5))
+    plt.figure(figsize=(10, 10))
     plt.scatter(X_top[:, 0], X_top[:, 1], c=c, s=3)
     plt.axis('off')
     plt.show()

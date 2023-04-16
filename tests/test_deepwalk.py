@@ -7,10 +7,10 @@ from src.utils import node_visualization
 from src import DeepWalk
 import networkx as nx
 
-data_info = get_dateset(data_name='wiki')
+data_info = get_dateset(data_name='dblp')
 
 if __name__ == "__main__":
-    G = nx.read_edgelist(data_info['edges'], create_using=nx.DiGraph())
+    G = nx.read_edgelist(data_info['edges'], create_using=nx.Graph())
     model = DeepWalk(G, walk_num=10, walk_len=10, walkers=1)
     model.train()
     embeddings = model.get_embedding()
