@@ -1,4 +1,6 @@
 import json
+import sys
+
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -38,7 +40,7 @@ def node_classification(embeddings, labels, test_size):
     Y_pred = clf.predict(X_test)
     print(classification_report(Y_test, Y_pred, zero_division=1))
 
-def node_visualization(embeddings, labels):
+def node_visualization(embeddings, labels, top_labels=[]):
     keys = sorted(embeddings.keys())
     X = np.array([embeddings[node] for node in keys])
     y = np.array([labels[node] for node in keys])
@@ -46,11 +48,28 @@ def node_visualization(embeddings, labels):
     tsne = TSNE(n_components=2, init='pca', learning_rate='auto', random_state=0)
     X_tsne = tsne.fit_transform(X)
 
-    labels, counts = np.unique(y, return_counts=True)
-    top_labels = labels[np.argsort(counts)][::-1][:3]
-    # top_labels = labels[np.argsort(counts)][:3]
+    # choose top labels
+    min_top_counts = sys.maxsize
+    if len(top_labels) != 3:
+        labels, counts = np.unique(y, return_counts=True)
+        top_labels = labels[np.argsort(counts)][::-1][:3]
+        min_top_counts = counts[np.argsort(counts)][::-1][0]
+        print(top_labels)
+    else:
+        for label in top_labels:
+            label_indices = np.where(y == label)[0]
+            min_top_counts = min(len(label_indices), min_top_counts)
 
-    mask = np.isin(y, top_labels)
+    mask = []
+    if min_top_counts > 500:
+        mask = np.zeros_like(y, dtype=bool)
+        for label in top_labels:
+            label_indices = np.where(y == label)[0]
+            np.random.shuffle(label_indices)
+            mask[label_indices[:500]] = True
+    else:
+        mask = np.isin(y, top_labels)
+
     X_top = X_tsne[mask]
     y_top = y[mask]
 
@@ -58,7 +77,7 @@ def node_visualization(embeddings, labels):
     color_map = dict(zip(top_labels, colors))
     c = np.array([color_map[label] for label in y_top])
 
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(5, 5))
     plt.scatter(X_top[:, 0], X_top[:, 1], c=c, s=3)
     plt.axis('off')
     plt.show()
