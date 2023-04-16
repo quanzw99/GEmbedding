@@ -3,6 +3,7 @@ sys.path.append("..")
 from src.utils import get_dateset
 from src.utils import get_labels
 from src.utils import node_classification
+from src.utils import node_visualization
 from src import DeepWalk
 import networkx as nx
 
@@ -15,3 +16,4 @@ if __name__ == "__main__":
     embeddings = model.get_embedding()
     labels = get_labels(data_info['labels'])
     node_classification(embeddings, labels, 0.2)
+    node_visualization(embeddings, labels)
