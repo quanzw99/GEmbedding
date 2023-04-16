@@ -4,7 +4,7 @@ import sys
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, f1_score
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
 import warnings
@@ -38,7 +38,11 @@ def node_classification(embeddings, labels, test_size):
 
     # Get report
     Y_pred = clf.predict(X_test)
-    print(classification_report(Y_test, Y_pred, zero_division=1))
+    # print(classification_report(Y_test, Y_pred, zero_division=1))
+    micro_f1 = f1_score(Y_test, Y_pred, average='micro')
+    print("micro_f1: {:.5f}".format(micro_f1))
+    macro_f1 = f1_score(Y_test, Y_pred, average='macro')
+    print("macro_f1: {:.5f}".format(macro_f1))
 
 def node_visualization(embeddings, labels, top_labels=[]):
     keys = sorted(embeddings.keys())

@@ -1,7 +1,7 @@
 .idea/
 .DS_Store
 **/__pycache__
-/dataset/
-!/dataset/wiki
-/preprocess/
+dataset/*
+!dataset/wiki/
+preprocess/*
 !/preprocess/preprocess.py
