@@ -1,7 +1,6 @@
 from .walker import RandomWalker
 from gensim.models import Word2Vec
 
-
 class Node2Vec:
     def __init__(self, graph, walk_num, walk_len, p=1.0, q=1.0, walkers=1):
         self.graph = graph
@@ -19,7 +18,10 @@ class Node2Vec:
         kwargs["sentences"] = self.sentences
         kwargs["min_count"] = kwargs.get("min_count", 0)
         kwargs["sg"] = 1
-        kwargs["hs"] = 1
+
+        # according  to the paper, node2vec uses negative sampling
+        # instead of hierarchical softmax
+        kwargs["hs"] = 0
 
         # print(f"len of the sentence = {len(self.sentences)}")
         print("Stating w2v...")

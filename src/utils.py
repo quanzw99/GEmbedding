@@ -2,7 +2,7 @@ import json
 import sys
 
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, f1_score
 from sklearn.manifold import TSNE
@@ -23,6 +23,22 @@ def get_labels(filename, skip_head = False):
             labels[parts[0]] = int(parts[1])
     return labels
 
+def k_fold_cross_validation(embeddings, labels, test_size, k, info):
+    result_file = '../tests/node2vec_result.txt'
+    keys = sorted(embeddings.keys())
+    X = np.array([embeddings[node] for node in keys])
+    Y = np.array([labels[node] for node in keys])
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+    clf = LogisticRegression(multi_class='auto', solver='lbfgs', max_iter=1000)
+    f1_micro = cross_val_score(clf, X_train, Y_train, cv=k, scoring='f1_micro', n_jobs=8)
+    f1_micro = f1_micro.sum() / k
+    f1_macro = cross_val_score(clf, X_train, Y_train, cv=k, scoring='f1_macro', n_jobs=8)
+    f1_macro = f1_macro.sum() / k
+    result = f"f1_micro = {f1_micro}, f1_macro = {f1_macro}\n"
+    with open(result_file, 'a') as f:
+        f.write(info + result)
+    return
+
 def node_classification(embeddings, labels, test_size):
     keys = sorted(embeddings.keys())
     X = np.array([embeddings[node] for node in keys])
@@ -30,7 +46,7 @@ def node_classification(embeddings, labels, test_size):
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
-    clf = LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=1000)
+    clf = LogisticRegression(multi_class='auto', solver='lbfgs', max_iter=1000)
     clf.fit(X_train, Y_train)
 
     # Test Accuracy
@@ -86,3 +102,4 @@ def node_visualization_3(embeddings, labels, top_labels=[], title=''):
     plt.scatter(X_top[:, 0], X_top[:, 1], c=c, s=5)
     plt.axis('off')
     plt.show()
+    return

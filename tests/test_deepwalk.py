@@ -16,4 +16,4 @@ if __name__ == "__main__":
     embeddings = model.get_embedding()
     labels = get_labels(data_info['labels'])
     node_classification(embeddings, labels, 0.2)
-    node_visualization_3(embeddings, labels, [1, 4, 7], title='deepwalk')
+    node_visualization_3(embeddings, labels, [1, 4, 7], title='DeepWalk')

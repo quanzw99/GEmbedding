@@ -5,3 +5,4 @@ dataset/*
 !dataset/wiki/
 preprocess/*
 !/preprocess/preprocess.py
+/tests/node2vec_result.txt
