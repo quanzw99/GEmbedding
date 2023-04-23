@@ -38,7 +38,7 @@ def create_alias_table(area_ratio):
 
 def alias_sample(probs, alias):
     N = len(probs)
-    random1 = np.random.randint(0, N)
+    random1 = int(np.random.random() * N)
     random2 = np.random.random()
     if random2 < probs[random1]:
         return random1

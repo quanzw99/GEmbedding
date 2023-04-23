@@ -9,7 +9,7 @@ class DeepWalk:
         self.walker = RandomWalker(graph)
         self.sentences = self.walker.simulate_walk(walk_num, walk_len, walkers, verbose=1)
 
-    def train(self, embed_size=128, window_size=10, workers=3, epochs=5, **kwargs):
+    def train(self, embed_size=128, window_size=5, workers=3, epochs=5, **kwargs):
         kwargs["vector_size"] = embed_size
         kwargs["window"] = window_size
         kwargs["workers"] = workers
