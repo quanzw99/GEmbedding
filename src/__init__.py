@@ -1,2 +1,3 @@
 from .deepwalk import DeepWalk
-__all__ = ["DeepWalk"]
+from .node2vec import Node2Vec
+__all__ = ["DeepWalk", "Node2Vec"]

@@ -34,7 +34,7 @@ def node_classification(embeddings, labels, test_size):
     clf.fit(X_train, Y_train)
 
     # Test Accuracy
-    print("Test score: {:.5f}".format(clf.score(X_test, Y_test)))
+    # print("Test score: {:.5f}".format(clf.score(X_test, Y_test)))
 
     # Get report
     Y_pred = clf.predict(X_test)
@@ -44,7 +44,7 @@ def node_classification(embeddings, labels, test_size):
     macro_f1 = f1_score(Y_test, Y_pred, average='macro')
     print("macro_f1: {:.5f}".format(macro_f1))
 
-def node_visualization(embeddings, labels, top_labels=[]):
+def node_visualization_3(embeddings, labels, top_labels=[]):
     keys = sorted(embeddings.keys())
     X = np.array([embeddings[node] for node in keys])
     y = np.array([labels[node] for node in keys])
@@ -82,6 +82,6 @@ def node_visualization(embeddings, labels, top_labels=[]):
     c = np.array([color_map[label] for label in y_top])
 
     plt.figure(figsize=(5, 5))
-    plt.scatter(X_top[:, 0], X_top[:, 1], c=c, s=3)
+    plt.scatter(X_top[:, 0], X_top[:, 1], c=c, s=5)
     plt.axis('off')
     plt.show()
