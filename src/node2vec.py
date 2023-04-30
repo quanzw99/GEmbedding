@@ -7,7 +7,9 @@ class Node2Vec:
         self.model = None
         self._embed = {}
         self.walker = RandomWalker(graph, p=p, q=q)
+        print('cal_transition_probs start')
         self.walker.cal_transition_probs()
+        print('cal_transition_probs finished')
         self.sentences = self.walker.simulate_walk(walk_num, walk_len, walkers, verbose=1)
 
     def train(self, embed_size=128, window_size=5, workers=3, epochs=5, **kwargs):

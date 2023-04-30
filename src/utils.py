@@ -23,8 +23,8 @@ def get_labels(filename, skip_head = False):
             labels[parts[0]] = int(parts[1])
     return labels
 
-def k_fold_cross_validation(embeddings, labels, test_size, k, info):
-    result_file = '../tests/node2vec_result.txt'
+def k_fold_cross_validation(embeddings, labels, test_size, k, info, file_name):
+    result_file = f'../tests/{file_name}.txt'
     keys = sorted(embeddings.keys())
     X = np.array([embeddings[node] for node in keys])
     Y = np.array([labels[node] for node in keys])
