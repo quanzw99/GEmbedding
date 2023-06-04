@@ -5,4 +5,5 @@ dataset/*
 !dataset/wiki/
 preprocess/*
 !/preprocess/preprocess.py
+!/preprocess/preprocess_for_NIS_baseline.py
 /tests/node2vec_result.txt
