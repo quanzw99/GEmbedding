@@ -38,21 +38,3 @@ mapped_data = [(paper_id, label_map[class_label]) for paper_id, class_label in l
 with open(data['labels'], "w") as f:
     for row in mapped_data:
         f.write(" ".join(row) + "\n")
-
-
-# for dblp
-# dblp = {
-#     'cite': './dblp/dblp_edgelist.txt',
-#     'edge': '../dataset/dblp/dblp_edgelist.txt',
-# }
-# citations = []
-# with open(dblp['cite'], 'r') as f:
-#     for line in f:
-#         parts = line.strip().split(' ')
-#         if len(parts) == 3:
-#             citations.append((parts[0], parts[1]))
-#
-# with open(dblp['edge'], 'w') as f:
-#     for tup in citations:
-#         line = ' '.join([str(x) for x in tup])
-#         f.write(line + '\n')

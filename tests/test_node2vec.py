@@ -5,6 +5,7 @@ from src.utils import get_dateset
 from src.utils import get_labels
 from src.utils import node_classification
 from src.utils import node_visualization_3
+from src.utils import get_f1_scores
 from src.utils import k_fold_cross_validation
 from src import Node2Vec
 import networkx as nx
@@ -39,6 +40,8 @@ if __name__ == "__main__":
 
     # evaluation
     labels = get_labels(data_info['labels'])
-    node_classification(embeddings, labels, 0.2)
+    micro_f1, macro_f1 = get_f1_scores(embeddings, labels, 0.2)
+    print("micro_f1: {:.5f}".format(micro_f1))
+    print("macro_f1: {:.5f}".format(macro_f1))
     # node_visualization_3(embeddings, labels, title=plot_title+'-wiki')
-    node_visualization_3(embeddings, labels, [1, 4, 7], title=plot_title+'-dblp')
+    # node_visualization_3(embeddings, labels, [1, 4, 7], title=plot_title+'-dblp')

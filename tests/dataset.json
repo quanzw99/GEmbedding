@@ -12,7 +12,11 @@
     "labels" : "../dataset/blogCatalog/bc_labels.txt"
   },
   "dblp": {
-    "edges"  : "../dataset/dblp/dblp_edgelist.txt",
-    "labels" : "../dataset/dblp/dblp_labels.txt"
+    "edges"  : "../dataset/dblp/dblp.txt",
+    "labels" : "../dataset/dblp/nid2label.txt"
+  },
+  "tmall": {
+    "edges"  : "../dataset/tmall/tmall.txt",
+    "labels" : "../dataset/tmall/node2label.txt"
   }
 }

@@ -49,16 +49,31 @@ def node_classification(embeddings, labels, test_size):
     clf = LogisticRegression(multi_class='auto', solver='lbfgs', max_iter=1000)
     clf.fit(X_train, Y_train)
 
-    # Test Accuracy
-    # print("Test score: {:.5f}".format(clf.score(X_test, Y_test)))
-
     # Get report
     Y_pred = clf.predict(X_test)
     # print(classification_report(Y_test, Y_pred, zero_division=1))
     micro_f1 = f1_score(Y_test, Y_pred, average='micro')
-    print("micro_f1: {:.5f}".format(micro_f1))
     macro_f1 = f1_score(Y_test, Y_pred, average='macro')
-    print("macro_f1: {:.5f}".format(macro_f1))
+    return micro_f1, macro_f1
+
+def get_f1_scores(embeddings, labels, test_size):
+    micro_f1_list = []
+    macro_f1_list = []
+
+    for _ in range(7):
+        micro_f1, macro_f1 = node_classification(embeddings, labels, test_size)
+        micro_f1_list.append(micro_f1)
+        macro_f1_list.append(macro_f1)
+
+    # remove the max and the min
+    micro_f1_list.remove(max(micro_f1_list))
+    micro_f1_list.remove(min(micro_f1_list))
+    macro_f1_list.remove(max(macro_f1_list))
+    macro_f1_list.remove(min(macro_f1_list))
+
+    micro_mean = sum(micro_f1_list) / len(micro_f1_list)
+    macro_mean = sum(macro_f1_list) / len(macro_f1_list)
+    return micro_mean, macro_mean
 
 def node_visualization_3(embeddings, labels, top_labels=[], title=''):
     keys = sorted(embeddings.keys())
