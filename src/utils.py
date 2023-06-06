@@ -25,7 +25,7 @@ def get_labels(filename, skip_head = False):
 
 def k_fold_cross_validation(embeddings, labels, test_size, k, info, file_name):
     result_file = f'../tests/{file_name}.txt'
-    keys = sorted(embeddings.keys())
+    keys = sorted(labels.keys())
     X = np.array([embeddings[node] for node in keys])
     Y = np.array([labels[node] for node in keys])
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
@@ -40,7 +40,7 @@ def k_fold_cross_validation(embeddings, labels, test_size, k, info, file_name):
     return
 
 def node_classification(embeddings, labels, test_size):
-    keys = sorted(embeddings.keys())
+    keys = sorted(labels.keys())
     X = np.array([embeddings[node] for node in keys])
     Y = np.array([labels[node] for node in keys])
 
@@ -76,7 +76,7 @@ def get_f1_scores(embeddings, labels, test_size):
     return micro_mean, macro_mean
 
 def node_visualization_3(embeddings, labels, top_labels=[], title=''):
-    keys = sorted(embeddings.keys())
+    keys = sorted(labels.keys())
     X = np.array([embeddings[node] for node in keys])
     y = np.array([labels[node] for node in keys])
 

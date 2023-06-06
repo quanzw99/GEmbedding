@@ -10,7 +10,7 @@ from src.utils import k_fold_cross_validation
 from src import Node2Vec
 import networkx as nx
 
-data_info = get_dateset(data_name='dblp')
+data_info = get_dateset(data_name='tmall')
 plot_title = 'Node2Vec'
 # optional_para = [0.25, 0.5]
 optional_para = [0.25, 0.5, 1, 2, 4]
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     # cross_validation()
     # init and train
     G = nx.read_edgelist(data_info['edges'], create_using=nx.Graph(), data=[('weight', int)])
-    model = Node2Vec(G, walk_num=80, walk_len=10, p=4, q=0.5, walkers=1)
+    model = Node2Vec(G, walk_num=20, walk_len=8, p=4, q=0.5, walkers=1)
     model.train()
     embeddings = model.get_embedding()
 

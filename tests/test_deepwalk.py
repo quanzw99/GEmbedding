@@ -14,7 +14,7 @@ plot_title = 'DeepWalk'
 if __name__ == "__main__":
     # DIGraph for wiki, cora; otherwise for dblp and blogCatalog
     G = nx.read_edgelist(data_info['edges'], create_using=nx.Graph())
-    model = DeepWalk(G, walk_num=80, walk_len=10, walkers=1)
+    model = DeepWalk(G, walk_num=20, walk_len=8, walkers=1)
     model.train()
     embeddings = model.get_embedding()
     labels = get_labels(data_info['labels'])
